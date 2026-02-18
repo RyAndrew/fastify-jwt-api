@@ -20,16 +20,16 @@ export function attachOktaRequestLogging() {
   oktaClient.requestExecutor.on('response', (response: { status?: number; url?: string; text?: () => Promise<string> }) => {
     console.log(`Okta Response: ${response.status} ${response.url}`)
     // Clone the response body for logging — response.text() may not be available on all response types
-    const bodyPromise = typeof response.text === 'function'
-      ? response.text().catch(() => null)
-      : Promise.resolve(null)
+   // const bodyPromise = typeof response.text === 'function'
+   //   ? response.text().catch(() => null)
+   //   : Promise.resolve(null)
 
-    bodyPromise.then((body) => {
+    //bodyPromise.then((body) => {
       db('okta_responses').insert({
         status: response.status,
         url: response.url,
-        body: body ?? null,
+        //body: body ?? null,
       }).catch((err: unknown) => console.error('Failed to log okta response:', err))
-    })
+    //})
   })
 }
