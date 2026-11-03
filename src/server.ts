@@ -5,6 +5,7 @@ import { attachOktaRequestLogging } from './okta-client'
 import authPlugin from './plugins/auth'
 import { userRoutes } from './routes/users'
 import { groupRoutes } from './routes/groups'
+import { logRoutes } from './routes/logs'
 
 const server = Fastify({ logger: true })
 
@@ -21,6 +22,7 @@ server.addHook('onRequest', async (request) => {
 server.register(authPlugin)
 server.register(userRoutes, { prefix: '/api/v1/' })
 server.register(groupRoutes, { prefix: '/api/v1/' })
+server.register(logRoutes, { prefix: '/api/v1/' })
 
 server.get('/health', async () => {
   return { status: 'ok' }
