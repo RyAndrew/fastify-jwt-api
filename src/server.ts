@@ -6,6 +6,7 @@ import authPlugin from './plugins/auth'
 import { userRoutes } from './routes/users'
 import { groupRoutes } from './routes/groups'
 import { logRoutes } from './routes/logs'
+import { nameRoutes } from './routes/names'
 
 const server = Fastify({ logger: true })
 
@@ -23,6 +24,7 @@ server.register(authPlugin)
 server.register(userRoutes, { prefix: '/api/v1/' })
 server.register(groupRoutes, { prefix: '/api/v1/' })
 server.register(logRoutes, { prefix: '/api/v1/' })
+server.register(nameRoutes, { prefix: '/api/v1/' })
 
 server.get('/health', async () => {
   return { status: 'ok' }
